@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Enhancer Adjuster</title>
+    <link rel="stylesheet" href="styles.css" title="CamelPad">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color:rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        .container {
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #imagePreview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border: 5px solid #000000;
+            border-radius: 5px;
+            transition: filter 0.3s ease;
+        }
+
+        .control {
+            margin: 20px 0;
+        }
+
+        .control label {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .control input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            background-color: #f5f5f5;
+            font-size: 1rem;
+        }
+        #imageInput {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            background-color: #f5f5f5;
+            font-size: 1rem;
+        }
+        .container label{
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        #downloadBtn {
+            background-color: #000000;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #downloadBtn:hover {
+            background-color: #000000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .control input {
+                width: 100%;
+            }
+
+            #downloadBtn {
+                width: 100%;
+            }
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 8px;
+            background-color: #ffffff;
+        }
+
+        #cloudPad {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #cloudPad a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        #cloudPad img {
+            vertical-align: middle;
+            margin-right: 5px;
+            margin-bottom: 6px;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: none;
+            color: #0083e1;
+        }
+
+        @media (min-width: 700px) {
+            nav {
+                gap: 60px; /* Increased gap for desktop */
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        footer p {
+            margin: 0;
+            color: #000000;
+        }
+
+        footer nav {
+            margin-top: 2px;
+        }
+
+        footer nav a {
+            text-decoration: none;
+            color: #0071e1;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
+        footer nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span id="cloudPad" style="font-size: 30px;">
+            <a href="#" onclick="showSection()">
+                <img src="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/cyclone.png"
+                    alt="camelpadnew" style="width: 30px; height: auto;" title="CamelPad">Camel Radius</a>
+        </span>
+        <nav id="desktopNav">
+            <a href="https://www.camelpad.me/">Home</a>
+            <a href="https://www.camelpad.me/">About</a>
+            <a href="https://www.camelpad.me/">Policy</a>
+        </nav>
+        <div id="mobileMenu" style="display: none;">
+            <button id="menuButton">&#9776;</button>
+            <div id="mobileNav" class="hidden">
+                <a href="https://www.camelpad.me/">Home</a>
+                <a href="https://www.camelpad.me/">About</a>
+                <a href="https://www.camelpad.me/">Policy</a>
+            </div>
+        </div>
+    </header>
+
+<br>
+<h1>Image Enhancer Adjuster</h1>
+<div class="container">
+    <label for="imageInput">Choose file : </label>
+    <input type="file" id="imageInput" accept="image/*">
+    
+    <!-- Brightness Control -->
+    <div class="control">
+        <label for="brightness">Brightness: </label>
+        <input type="range" id="brightness" min="0" max="200" value="100">
+        <span id="brightnessValue">100%</span>
+    </div>
+
+    <!-- Contrast Control -->
+    <div class="control">
+        <label for="contrast">Contrast: </label>
+        <input type="range" id="contrast" min="0" max="200" value="100">
+        <span id="contrastValue">100%</span>
+    </div>
+
+    <!-- Saturation Control -->
+    <div class="control">
+        <label for="saturation">Saturation: </label>
+        <input type="range" id="saturation" min="0" max="200" value="100">
+        <span id="saturationValue">100%</span>
+    </div>
+
+    <!-- Sharpness Control -->
+    <div class="control">
+        <label for="sharpness">Sharpness: </label>
+        <input type="range" id="sharpness" min="0" max="10" value="1" step="0.1">
+        <span id="sharpnessValue">1</span>
+    </div>
+
+    <div id="previewContainer">
+        <img id="imagePreview" src="" alt="Image Preview" style="display:none;">
+    </div>
+    <button id="downloadBtn">Download Image</button>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<footer>
+    <p>&copy; 2024 CamelPad. All rights reserved.</p>
+    <nav>
+        <a href="index.html">Back to Home >></a>
+    </nav>
+</footer>
+<script>
+    const imageInput = document.getElementById("imageInput");
+    const imagePreview = document.getElementById("imagePreview");
+    const brightnessControl = document.getElementById("brightness");
+    const contrastControl = document.getElementById("contrast");
+    const saturationControl = document.getElementById("saturation");
+    const sharpnessControl = document.getElementById("sharpness");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    let uploadedImage = null;
+
+    imageInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                uploadedImage = reader.result;
+                imagePreview.src = uploadedImage;
+                imagePreview.style.display = "block";
+                downloadBtn.style.display = "inline-block";
+                updateImageStyles();
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Please upload a valid image file.");
+        }
+    });
+
+    function updateImageStyles() {
+        const brightness = brightnessControl.value;
+        const contrast = contrastControl.value;
+        const saturation = saturationControl.value;
+        const sharpness = sharpnessControl.value;
+
+        imagePreview.style.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%)`;
+        // For sharpness, we'd need a more complex image processing approach, such as canvas manipulation or a library.
+    }
+
+    brightnessControl.addEventListener("input", () => {
+        document.getElementById("brightnessValue").textContent = `${brightnessControl.value}%`;
+        updateImageStyles();
+    });
+
+    contrastControl.addEventListener("input", () => {
+        document.getElementById("contrastValue").textContent = `${contrastControl.value}%`;
+        updateImageStyles();
+    });
+
+    saturationControl.addEventListener("input", () => {
+        document.getElementById("saturationValue").textContent = `${saturationControl.value}%`;
+        updateImageStyles();
+    });
+
+    sharpnessControl.addEventListener("input", () => {
+        document.getElementById("sharpnessValue").textContent = sharpnessControl.value;
+        // Implement sharpness adjustment if needed.
+    });
+
+    downloadBtn.addEventListener("click", () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const img = new Image();
+        img.src = uploadedImage;
+        img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            // Apply filters to the canvas based on current controls
+            ctx.filter = `brightness(${brightnessControl.value}%) contrast(${contrastControl.value}%) saturate(${saturationControl.value}%)`;
+
+            // Redraw the image with the applied filters
+            ctx.drawImage(img, 0, 0);
+
+            const dataUrl = canvas.toDataURL("image/png");
+            const a = document.createElement("a");
+            a.href = dataUrl;
+            a.download = "enhanced-image.png";
+            a.click();
+        };
+    });
+</script>
+</body>
+</html>

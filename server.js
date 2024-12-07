@@ -38,6 +38,24 @@ const drive = google.drive({ version: "v3", auth });
 
 // Serve the static files in the "public" directory
 app.use(express.static("public"));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+app.get("/crop", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "ccrop.html"));
+});
+app.get("/css", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "styles.css"));
+});
+app.get("/enhance", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "cenhance.html"));
+});
+app.get("/border", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "cborder.html"));
+});
+app.get("/colorborder", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "colborder.html"));
+});
 
 // Route to handle image upload and storing on Google Drive
 app.post("/upload", upload.single("image"), async (req, res) => {

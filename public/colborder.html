@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Gradient Border Adjuster</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color:rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        .container {
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #imagePreview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border: 4px solid #ffffff;
+            border-radius: 5px;
+            transition: border-radius 0.3s ease;
+        }
+
+        .control {
+            margin: 20px 0;
+        }
+
+        .control label {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .control input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            background-color: #f5f5f5;
+            font-size: 1rem;
+        }
+        #imageInput {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            background-color: #f5f5f5;
+            font-size: 1rem;
+        }
+        .container label{
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        #borderValue {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        #downloadBtn {
+            background-color: #000000;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #downloadBtn:hover {
+            background-color: #000000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .control input {
+                width: 100%;
+            }
+
+            #downloadBtn {
+                width: 100%;
+            }
+        }
+ header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #ffffff;
+}
+#cloudPad {
+    font-size: 30px;
+    font-weight: bold;
+}
+#cloudPad a {
+    text-decoration: none;
+    color: #333;
+}
+#cloudPad img {
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 6px;
+}
+nav {
+    display: flex;
+    gap: 10px;
+}
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+}
+nav a:hover {
+    text-decoration: none;
+    color: #0083e1;
+}
+@media (min-width: 700px) {
+    nav {
+        gap: 60px; /* Increased gap for desktop */
+    }
+}
+footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        footer p {
+            margin: 0;
+            color: #000000;
+        }
+
+        footer nav {
+            margin-top: 2px;
+        }
+
+        footer nav a {
+            text-decoration: none;
+            color: #0071e1;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
+        footer nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span id="cloudPad" style="font-size: 30px;">
+            <a href="#" onclick="showSection()">
+                <img src="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/cyclone.png"
+                    alt="camelpadnew" style="width: 30px; height: auto;" title="CamelPad">Camel Radius</a>
+        </span>
+        <nav id="desktopNav">
+            <a href="https://www.camelpad.me/">Home</a>
+            <a href="https://www.camelpad.me/">About</a>
+            <a href="https://www.camelpad.me/">Policy</a>
+        </nav>
+        <div id="mobileMenu" style="display: none;">
+            <button id="menuButton">&#9776;</button>
+            <div id="mobileNav" class="hidden">
+                <a href="https://www.camelpad.me/">Home</a>
+                <a href="https://www.camelpad.me/">About</a>
+                <a href="https://www.camelpad.me/">Policy</a>
+            </div>
+        </div>
+    </header>
+    <h1>Colorful Gradient Border Adjuster</h1>
+    <div class="container">
+        <label for="imageInput">Choose file:</label>
+        <input type="file" id="imageInput" accept="image/*">
+
+        <div class="control">
+            <label for="borderColor1">Border Color 1:</label>
+            <input type="color" id="borderColor1" value="#000000">
+        </div>
+        <div class="control">
+            <label for="borderColor2">Border Color 2:</label>
+            <input type="color" id="borderColor2" value="#ffffff">
+        </div>
+        <div class="control">
+            <label for="borderPadding">Border Padding:</label>
+            <input type="range" id="borderPadding" min="0" max="50" value="5">
+        </div>
+
+        <div id="previewContainer">
+            <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
+        </div>
+
+        <button id="downloadBtn">Download Image</button>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <footer>
+        <p>&copy; 2024 CamelPad. All rights reserved.</p>
+        <nav>
+            <a href="index.html">Back to Home >></a>
+        </nav>
+    </footer>
+    <script>
+        const imageInput = document.getElementById("imageInput");
+        const imagePreview = document.getElementById("imagePreview");
+        const borderColor1Control = document.getElementById("borderColor1");
+        const borderColor2Control = document.getElementById("borderColor2");
+        const borderPaddingControl = document.getElementById("borderPadding");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        let uploadedImage = null;
+
+        imageInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    uploadedImage = reader.result;
+                    imagePreview.src = uploadedImage;
+                    imagePreview.style.display = "block";
+                    downloadBtn.style.display = "inline-block";
+                    updateBorder();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+
+        borderColor1Control.addEventListener("input", updateBorder);
+        borderColor2Control.addEventListener("input", updateBorder);
+        borderPaddingControl.addEventListener("input", updateBorder);
+
+        function updateBorder() {
+            const borderColor1 = borderColor1Control.value;
+            const borderColor2 = borderColor2Control.value;
+            const padding = borderPaddingControl.value;
+
+            imagePreview.style.padding = `${padding}px`;
+            imagePreview.style.background = `linear-gradient(${borderColor1}, ${borderColor2})`;
+            imagePreview.style.borderRadius = "5px";
+        }
+
+        downloadBtn.addEventListener("click", () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            const img = new Image();
+            img.src = uploadedImage;
+            img.onload = () => {
+                const padding = parseInt(borderPaddingControl.value);
+                const width = img.width + 2 * padding;
+                const height = img.height + 2 * padding;
+
+                canvas.width = width;
+                canvas.height = height;
+
+                // Create the gradient
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, borderColor1Control.value);
+                gradient.addColorStop(1, borderColor2Control.value);
+
+                // Fill the background with the gradient
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+
+                // Draw the image
+                ctx.drawImage(img, padding, padding, img.width, img.height);
+
+                // Generate download link
+                const dataUrl = canvas.toDataURL("image/png");
+                const a = document.createElement("a");
+                a.href = dataUrl;
+                a.download = "image_with_gradient_border.png";
+                a.click();
+            };
+        });
+    </script>
+</body>
+</html>
