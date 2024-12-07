@@ -19,17 +19,24 @@
             font-size: 2rem;
             margin-bottom: 20px;
             font-weight: bold;
-            color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
             text-align: center;
         }
-
-        .container {
-            background: rgb(255, 255, 255);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: aliceblue;
+    color: #333;
+}
+      /* Main Container */
+.container {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 700px;
+    margin: 30px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 4px solid #749cfb;
+}
 
         #imagePreview {
             max-width: 100%;
@@ -99,6 +106,7 @@
 
             .container {
                 padding: 15px;
+                width: 90%;
             }
 
             .control input {
@@ -134,100 +142,101 @@
         footer nav a:hover {
             text-decoration: underline;
         }
+
+        #imageInput {
+    font-weight: bold;
+
+}
+
+label{
+    font-weight: bold;
+}
     </style>
 </head>
 <body>
 
-    <header>
-        <span id="cloudPad" style="font-size: 30px;">
-            <a href="#" onclick="showSection()">
-                <img src="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/cyclone.png"
-                    alt="camelpadnew" style="width: 30px; height: auto;" title="CamelPad">Camel Radius</a>
-        </span>
-        <nav id="desktopNav">
-            <a href="https://www.camelpad.me/">Home</a>
-            <a href="https://www.camelpad.me/">About</a>
-            <a href="https://www.camelpad.me/">Policy</a>
-        </nav>
-        <div id="mobileMenu" style="display: none;">
-            <button id="menuButton">&#9776;</button>
-            <div id="mobileNav" class="hidden">
-                <a href="https://www.camelpad.me/">Home</a>
-                <a href="https://www.camelpad.me/">About</a>
-                <a href="https://www.camelpad.me/">Policy</a>
-            </div>
-        </div>
-    </header>
-    <h1>Image Cropper Tool</h1>
-    <div class="container">
-        <label for="imageInput">Choose file:</label>
-        <input type="file" id="imageInput" accept="image/*">
-        <div class="control">
-            <label for="borderRadius">Crop Area: </label>
-        </div>
-        <div id="previewContainer">
-            <img id="imagePreview" src="" alt="Image Preview" style="display:none;">
-        </div>
-        <button id="downloadBtn">Download Cropped Image</button>
+<header>
+    <span id="cloudPad" style="font-size: 30px;">
+        <a href="/" onclick="showSection()">
+            <img src="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/cyclone.png"
+                alt="camelpadnew" style="width: 30px; height: auto;" title="CamelPad">Camel Tools</a>
+    </span>
+    <nav id="desktopNav">
+        <a href="https://www.camelpad.me/">Home</a>
+        <a href="https://www.camelpad.me/">About</a>
+        <a href="https://www.camelpad.me/">Policy</a>
+    </nav>
+</header>
+
+<h1>Image Cropper Tool</h1>
+<div class="container">
+    <label for="imageInput">Choose file:</label>
+    <input type="file" id="imageInput" accept="image/*">
+    <div id="previewContainer">
+        <img id="imagePreview" src="" alt="Image Preview" style="display:none;">
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br>
-    <footer>
-        <p>&copy; 2024 CamelPad. All rights reserved.</p>
-        <nav>
-            <a href="index.html">Back to Home >></a>
-        </nav>
-    </footer>
-    <!-- Add Cropper.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-    <script>
-        const imageInput = document.getElementById("imageInput");
-        const imagePreview = document.getElementById("imagePreview");
-        const downloadBtn = document.getElementById("downloadBtn");
+    <button id="downloadBtn" style="display:none;">Download Cropped Image</button>
+</div>
+<br> <br> <br> <br> <br> <br> <br> <br>
+<footer>
+    <p>&copy; 2024 CamelPad. All rights reserved.</p>
+    <nav>
+        <a href="index.html">Back to Home >></a>
+    </nav>
+</footer>
 
-        let cropper;
+<!-- Add Cropper.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+<script>
+    const imageInput = document.getElementById("imageInput");
+    const imagePreview = document.getElementById("imagePreview");
+    const downloadBtn = document.getElementById("downloadBtn");
 
-        // Handle file input change and image preview
-        imageInput.addEventListener("change", (event) => {
-            const file = event.target.files[0];
-            if (file && file.type.startsWith("image/")) {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    imagePreview.src = reader.result;
-                    imagePreview.style.display = "block";
-                    imagePreview.onload = () => {
-                        if (cropper) {
-                            cropper.destroy();
-                        }
-                        cropper = new Cropper(imagePreview, {
-                            aspectRatio: 16 / 9,  // Adjust as needed
-                            viewMode: 1,  // Limits the crop area to the image size
-                            autoCropArea: 0.5, // Initial crop area size
-                            responsive: true,
-                            zoomable: true,
-                            scalable: true,
-                            cropBoxResizable: true, // Allow resizing of the crop box
-                            checkOrientation: false, // Disable orientation check for better performance
-                        });
-                        downloadBtn.style.display = "inline-block";
-                    };
+    let cropper;
+    let originalFileName = "cropped-image";
+
+    // Handle file input change and image preview
+    imageInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+            originalFileName = file.name.split('.').slice(0, -1).join('.') || "cropped-image"; // Extract original file name
+            const reader = new FileReader();
+            reader.onload = () => {
+                imagePreview.src = reader.result;
+                imagePreview.style.display = "block";
+                imagePreview.onload = () => {
+                    if (cropper) {
+                        cropper.destroy();
+                    }
+                    cropper = new Cropper(imagePreview, {
+                        viewMode: 1, // Limits the crop area to the image size
+                        autoCropArea: 1.0, // Set full crop area initially
+                        responsive: true,
+                        zoomable: true,
+                        scalable: true,
+                        cropBoxResizable: true,
+                        checkOrientation: false, // Disable orientation check for better performance
+                    });
+                    downloadBtn.style.display = "inline-block";
                 };
-                reader.readAsDataURL(file);
-            } else {
-                alert("Please upload a valid image file.");
-            }
-        });
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Please upload a valid image file.");
+        }
+    });
 
-        // Handle download of cropped image
-        downloadBtn.addEventListener("click", () => {
-            const canvas = cropper.getCroppedCanvas();
-            if (canvas) {
-                const dataUrl = canvas.toDataURL("image/png");
-                const a = document.createElement("a");
-                a.href = dataUrl;
-                a.download = "cropped-image.png";
-                a.click();
-            }
-        });
-    </script>
+    // Handle download of cropped image
+    downloadBtn.addEventListener("click", () => {
+        const canvas = cropper.getCroppedCanvas();
+        if (canvas) {
+            const dataUrl = canvas.toDataURL("image/png");
+            const a = document.createElement("a");
+            a.href = dataUrl;
+            a.download = `${originalFileName}-Cameltool.png`; // Use original file name
+            a.click();
+        }
+    });
+</script>
 </body>
 </html>
