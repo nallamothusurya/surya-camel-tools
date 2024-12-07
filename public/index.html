@@ -6,77 +6,99 @@
     <title>Camel Radius</title>
     <link rel="stylesheet" href="styles.css" title="CamelPad">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: aliceblue;
-        }
-        .container {
-            margin: 20px;
-        }
-        .app {
-            display: inline-block;
-            margin: 20px;
-            padding: 20px;
-            border: 3px solid #749cfb;
-            border-radius: 10px;
-            text-align: center;
-            width: 200px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .app img {
-            width: 50px;
-            height: auto;
-        }
-        .app h3 {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-        .app p {
-            font-size: 14px;
-            color: #555;
-            margin: 10px 0;
-        }
-        .app button {
-            background-color: #4079ff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .app button:hover {
-            background-color: #537dcf;
-        }
+   body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+}
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #ffffff;
-        }
+.container {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Default 4 columns on larger screens */
+    gap: 20px;
+}
 
-        footer p {
-            margin: 0;
-            color: #000000;
-        }
+.app {
+    padding: 20px;
+    border: 3px solid #749cfb;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        footer nav {
-            margin-top: 2px;
-        }
+.app img {
+    width: 50px;
+    height: auto;
+}
 
-        footer nav a {
-            text-decoration: none;
-            color: #0071e1;
-            margin: 0 10px;
-            font-size: 16px;
-        }
+.app h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
 
-        footer nav a:hover {
-            text-decoration: underline;
-        }
+.app p {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.app button {
+    background-color: #4079ff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.app button:hover {
+    background-color: #537dcf;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+footer p {
+    margin: 0;
+    color: #000000;
+}
+
+footer nav {
+    margin-top: 2px;
+}
+
+footer nav a {
+    text-decoration: none;
+    color: #0071e1;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+footer nav a:hover {
+    text-decoration: underline;
+}
+
+/* Media Query for Small Screens (up to 768px) */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for small screens */
+    }
+}
+
+/* Media Query for Extra Small Screens (up to 480px) */
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr; /* 1 column for very small screens */
+    }
+}
+
     </style>
 </head>
 <body>
@@ -95,7 +117,7 @@
 
     <div class="container">
         <div class="app">
-            <img src="https://img.icons8.com/color/50/crop.png" alt="Image Enhancer">
+            <img src="https://img.icons8.com/color/50/filter.png" alt="Image Enhancer">
             <h3>Image Enhancer</h3>
             <p>Improve the quality of your images with one click.</p>
             <button onclick="openEnhancer()">Try Now</button>
@@ -113,7 +135,7 @@
             <button onclick="openColorBorder()">Try Now</button>
         </div>
         <div class="app">
-            <img src="https://img.icons8.com/color/50/crop.png" alt="Image Border Radius">
+            <img src="https://img.icons8.com/color/50/flip.png" alt="Image Border Radius">
             <h3>Image Border Radius</h3>
             <p>Round the corners of your images seamlessly.</p>
             <button onclick="openBorderRadius()">Try Now</button>
@@ -126,23 +148,23 @@
             <a href="index.html">Back to Home >></a>
         </nav>
     </footer>
+
     <script>
-       function openEnhancer() {
-    window.location.href = '/enhance'; // Redirect to the Image Enhancer page
-}
+        function openEnhancer() {
+            window.location.href = '/enhance'; // Redirect to the Image Enhancer page
+        }
 
-function openCropper() {
-    window.location.href = '/crop'; // Redirect to the Image Cropper page
-}
+        function openCropper() {
+            window.location.href = '/crop'; // Redirect to the Image Cropper page
+        }
 
-function openColorBorder() {
-    window.location.href = '/colorborder'; // Redirect to the Image Color Border page
-}
+        function openColorBorder() {
+            window.location.href = '/colorborder'; // Redirect to the Image Color Border page
+        }
 
-function openBorderRadius() {
-    window.location.href = '/border'; // Redirect to the Image Border Radius page
-}
-
+        function openBorderRadius() {
+            window.location.href = '/border'; // Redirect to the Image Border Radius page
+        }
     </script>
 </body>
 </html>
