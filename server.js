@@ -57,6 +57,10 @@ app.get("/colorborder", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "colborder.html"));
 });
 
+app.get("/advertise", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "image.png"));
+});
+
 // Route to handle image upload and storing on Google Drive
 app.post("/upload", upload.single("image"), async (req, res) => {
     const file = req.file;
