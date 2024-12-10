@@ -60,7 +60,13 @@ app.get("/colorborder", (req, res) => {
 app.get("/advertise", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "image.png"));
 });
+app.get("/favicon", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "favicon.ico"));
+});
 
+app.get("/icon", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "favicon-32x32.png"));
+});
 // Route to handle image upload and storing on Google Drive
 app.post("/upload", upload.single("image"), async (req, res) => {
     const file = req.file;
